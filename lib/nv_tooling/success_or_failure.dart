@@ -38,7 +38,7 @@ class Success<S, F> extends SuccessOrFailure<S, F> {
     S Function(S s)? success,
     F Function(F f)? failure,
   }) =>
-      successOf(success?.call(_success) ?? _success);
+      successOf<S, F>(success?.call(_success) ?? _success);
 }
 
 /// Failure case.
@@ -65,7 +65,7 @@ class Failure<S, F> extends SuccessOrFailure<S, F> {
     S Function(S s)? success,
     F Function(F f)? failure,
   }) =>
-      failureOf(failure?.call(_failure) ?? _failure);
+      failureOf<S, F>(failure?.call(_failure) ?? _failure);
 }
 
 /// Constructor wrapper for Success which reads nicer.
