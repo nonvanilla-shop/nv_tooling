@@ -6,6 +6,10 @@ abstract class SuccessOrFailure<S, F> {
   static failure<S, F>(F failure) => Failure(failure);
 
   T access<T>(T Function(S success) onSuccess, T Function(F failure) onFailure);
+  SuccessOrFailure<S, F> map({
+    S Function(S s)? success,
+    F Function(F f)? failure,
+  });
   bool get isSuccess;
   bool get isFailure;
 }
@@ -28,6 +32,13 @@ class Success<S, F> extends SuccessOrFailure<S, F> {
 
   @override
   bool get isSuccess => true;
+
+  @override
+  SuccessOrFailure<S, F> map({
+    S Function(S s)? success,
+    F Function(F f)? failure,
+  }) =>
+      successOf(success?.call(_success) ?? _success);
 }
 
 /// Failure case.
@@ -48,6 +59,13 @@ class Failure<S, F> extends SuccessOrFailure<S, F> {
 
   @override
   bool get isSuccess => false;
+
+  @override
+  SuccessOrFailure<S, F> map({
+    S Function(S s)? success,
+    F Function(F f)? failure,
+  }) =>
+      failureOf(failure?.call(_failure) ?? _failure);
 }
 
 /// Constructor wrapper for Success which reads nicer.
