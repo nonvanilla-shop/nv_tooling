@@ -1,3 +1,7 @@
+## 0.0.5
+
+* Extend package description for max score.
+
 ## 0.0.4
 
 * Add handy iterable extensions.
