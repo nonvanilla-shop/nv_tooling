@@ -1,3 +1,7 @@
+## 0.0.4
+
+* Add handy iterable extensions.
+
 ## 0.0.3
 
 * Add nothing class as a substitute for Void.
