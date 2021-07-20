@@ -6,9 +6,9 @@ abstract class SuccessOrFailure<S, F> {
   static failure<S, F>(F failure) => Failure(failure);
 
   T access<T>(T Function(S success) onSuccess, T Function(F failure) onFailure);
-  SuccessOrFailure<S, F> map({
-    S Function(S s)? success,
-    F Function(F f)? failure,
+  SuccessOrFailure<NS, NF> map<NS, NF>({
+    NS Function(S s)? success,
+    NF Function(F f)? failure,
   });
   bool get isSuccess;
   bool get isFailure;
@@ -34,11 +34,11 @@ class Success<S, F> extends SuccessOrFailure<S, F> {
   bool get isSuccess => true;
 
   @override
-  SuccessOrFailure<S, F> map({
-    S Function(S s)? success,
-    F Function(F f)? failure,
+  SuccessOrFailure<NS, NF> map<NS, NF>({
+    NS Function(S s)? success,
+    NF Function(F f)? failure,
   }) =>
-      successOf<S, F>(success?.call(_success) ?? _success);
+      successOf<NS, NF>(success?.call(_success) ?? _success as NS);
 }
 
 /// Failure case.
@@ -61,11 +61,11 @@ class Failure<S, F> extends SuccessOrFailure<S, F> {
   bool get isSuccess => false;
 
   @override
-  SuccessOrFailure<S, F> map({
-    S Function(S s)? success,
-    F Function(F f)? failure,
+  SuccessOrFailure<NS, NF> map<NS, NF>({
+    NS Function(S s)? success,
+    NF Function(F f)? failure,
   }) =>
-      failureOf<S, F>(failure?.call(_failure) ?? _failure);
+      failureOf<NS, NF>(failure?.call(_failure) ?? _failure as NF);
 }
 
 /// Constructor wrapper for Success which reads nicer.
