@@ -82,3 +82,9 @@ SuccessOrFailure<S, dynamic> catching<S>(S Function() attempt) {
     return failureOf(e);
   }
 }
+
+class Nothing {
+  const Nothing();
+}
+
+const nothing = Nothing();
