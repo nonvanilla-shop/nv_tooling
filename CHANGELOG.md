@@ -1,3 +1,7 @@
+## 0.0.6
+
+* Fix map function in SuccessOrFailure.
+
 ## 0.0.5
 
 * Extend package description for max score.
