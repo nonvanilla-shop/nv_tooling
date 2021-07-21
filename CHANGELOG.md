@@ -1,3 +1,7 @@
+## 0.0.7
+
+* Add Selection class (both with optional and mandatory selection).
+
 ## 0.0.6
 
 * Fix map function in SuccessOrFailure.
