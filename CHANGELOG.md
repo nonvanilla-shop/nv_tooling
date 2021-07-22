@@ -1,3 +1,7 @@
+## 0.0.8
+
+* Add mapGrouped to iterable extensions.
+
 ## 0.0.7
 
 * Add Selection class (both with optional and mandatory selection).
