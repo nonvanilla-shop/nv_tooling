@@ -83,8 +83,12 @@ SuccessOrFailure<S, dynamic> catching<S>(S Function() attempt) {
   }
 }
 
+typedef AsyncSuccessOrFailure<S, F> = Future<SuccessOrFailure<S, F>>;
+
+/// Void object for success cases that should return void.
 class Nothing {
   const Nothing();
 }
 
+/// Cleaner way to return a [Nothing] object.
 const nothing = Nothing();

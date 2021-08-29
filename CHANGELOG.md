@@ -1,3 +1,7 @@
+## 0.0.9
+
+* Add Doc Strings and type def for Future<SuccessOrFailure<S, F>>.
+
 ## 0.0.8
 
 * Add mapGrouped to iterable extensions.
