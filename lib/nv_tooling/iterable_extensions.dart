@@ -25,12 +25,12 @@ extension IterableExtensions<T> on Iterable<T> {
   }
 
   Iterable<G> mapGrouped<K, G>({
-    required K? Function(T item) keyBuilder,
+    required K? Function(T item) groupBy,
     required G Function(K? key, List<T> items) groupBuilder,
   }) {
     final grouped = <K?, List<T>>{};
     forEach((item) {
-      final key = keyBuilder(item);
+      final key = groupBy(item);
       grouped.putIfAbsent(key, () => []);
       grouped[key]!.add(item);
     });
