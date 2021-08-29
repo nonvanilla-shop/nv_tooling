@@ -1,3 +1,7 @@
+## 0.0.10
+
+* Add Documentation.
+
 ## 0.0.9
 
 * Add Doc Strings and type def for Future<SuccessOrFailure<S, F>>.
