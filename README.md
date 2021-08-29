@@ -85,7 +85,7 @@ print(namesWithIndex);
 
 
 ```
-final names = ['Alex', 'Anna', 'Bill''];
+final names = ['Alex', 'Anna', 'Bill'];
 final namesWithJolo = names.separatedBy('Jolo');
 
 print(namesWithJolo);

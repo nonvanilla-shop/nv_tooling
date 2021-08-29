@@ -1,3 +1,7 @@
+## 0.0.11
+
+* Fix Typo.
+
 ## 0.0.10
 
 * Add Documentation.
