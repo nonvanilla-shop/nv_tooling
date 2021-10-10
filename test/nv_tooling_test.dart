@@ -5,14 +5,14 @@ import 'package:nv_tooling/nv_tooling.dart';
 void main() {
   test('Success has boolean getters with correct return values', () {
     final success = valueOf(12);
-    expect(success.isFailure, false);
-    expect(success.isSuccess, true);
+    expect(success.isException, false);
+    expect(success.isValue, true);
   });
 
   test('Exception has boolean getters with correct return values', () {
     final success = exceptionOf(Exception('Hello'));
-    expect(success.isFailure, true);
-    expect(success.isSuccess, false);
+    expect(success.isException, true);
+    expect(success.isValue, false);
   });
 
   test('Success accessor calls onSuccess function', () {

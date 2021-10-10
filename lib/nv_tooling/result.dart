@@ -1,94 +1,93 @@
 /// Base class declaring the interface.
-abstract class Result<S, E extends Exception> {
+abstract class Result<S, E> {
   const Result();
 
-  static value<S, F>(S success) => Value(success);
-  static exception<S, E extends Exception>(E failure) => Error(failure);
+  static value<V, E>(V success) => Value(success);
+  static exception<V, E>(E failure) => Error(failure);
 
   S unwrap();
 
   T access<T>(
-    T Function(S success) onValue,
-    T Function(E failure) onException,
+    T Function(S value) onValue,
+    T Function(E exception) onException,
   );
 
-  Result<NS, NE> map<NS, NE extends Exception>({
-    NS Function(S s)? value,
-    NE Function(E f)? exception,
+  Result<NS, NE> map<NS, NE>({
+    NS Function(S v)? value,
+    NE Function(E e)? exception,
   });
 
-  bool get isSuccess;
-  bool get isFailure;
+  bool get isValue;
+  bool get isException;
 }
 
 /// Value case.
-class Value<S, E extends Exception> extends Result<S, E> {
-  final S _value;
+class Value<V, E> extends Result<V, E> {
+  final V _value;
 
   const Value(this._value);
 
   @override
-  S unwrap() => _value;
+  V unwrap() => _value;
 
   @override
   T access<T>(
-    T Function(S success) onSuccess,
-    T Function(E failure) onFailure,
+    T Function(V success) onValue,
+    T Function(E exception) onException,
   ) =>
-      onSuccess(_value);
+      onValue(_value);
 
   @override
-  bool get isFailure => false;
+  bool get isException => false;
 
   @override
-  bool get isSuccess => true;
+  bool get isValue => true;
 
   @override
-  Result<NS, NE> map<NS, NE extends Exception>({
-    NS Function(S s)? value,
-    NE Function(E f)? exception,
+  Result<NV, NE> map<NV, NE>({
+    NV Function(V v)? value,
+    NE Function(E e)? exception,
   }) =>
-      valueOf<NS, NE>(value?.call(_value) ?? _value as NS);
+      valueOf<NV, NE>(value?.call(_value) ?? _value as NV);
 }
 
 /// Error case.
-class Error<S, E extends Exception> extends Result<S, E> {
+class Error<V, E> extends Result<V, E> {
   final E _exception;
 
   const Error(this._exception);
 
   @override
-  S unwrap() => throw _exception;
+  V unwrap() => throw Exception(_exception);
 
   @override
   T access<T>(
-    T Function(S success) onSuccess,
-    T Function(E failure) onFailure,
+    T Function(V success) onValue,
+    T Function(E failure) onException,
   ) =>
-      onFailure(_exception);
+      onException(_exception);
 
   @override
-  bool get isFailure => true;
+  bool get isException => true;
 
   @override
-  bool get isSuccess => false;
+  bool get isValue => false;
 
   @override
-  Result<NS, NE> map<NS, NE extends Exception>({
-    NS Function(S s)? value,
-    NE Function(E f)? exception,
+  Result<NV, NE> map<NV, NE>({
+    NV Function(V v)? value,
+    NE Function(E e)? exception,
   }) =>
-      exceptionOf<NS, NE>(exception?.call(_exception) ?? _exception as NE);
+      exceptionOf<NV, NE>(exception?.call(_exception) ?? _exception as NE);
 }
 
 /// Constructor wrapper for Value which reads nicer.
-Result<S, E> valueOf<S, E extends Exception>(S success) => Value(success);
+Result<V, E> valueOf<V, E>(V value) => Value(value);
 
 /// Constructor wrapper for Exception which reads nicer.
-Result<S, E> exceptionOf<S, E extends Exception>(E exception) =>
-    Error(exception);
+Result<V, E> exceptionOf<V, E>(E exception) => Error(exception);
 
-typedef AsyncResult<S, E extends Exception> = Future<Result<S, E>>;
+typedef AsyncResult<V, E> = Future<Result<V, E>>;
 
 /// Void object for value cases that should return void.
 class Nothing {

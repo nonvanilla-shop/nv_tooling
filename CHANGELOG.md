@@ -1,3 +1,7 @@
+## 0.1.0+1
+
+* Fix bug in Result type.
+
 ## 0.1.0
 
 * Add Result type and remove SuccessOrFailure case.
