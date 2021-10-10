@@ -1,3 +1,7 @@
+## 0.1.0
+
+* Add Result type and remove SuccessOrFailure case.
+
 ## 0.0.12
 
 * Add repository to pubspec.yaml.
