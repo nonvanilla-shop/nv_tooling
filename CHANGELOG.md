@@ -1,3 +1,7 @@
+## 0.2.0
+
+* Remove Result type.
+
 ## 0.1.0+1
 
 * Fix bug in Result type.

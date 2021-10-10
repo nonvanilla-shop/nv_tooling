@@ -1,4 +1,3 @@
-import 'package:example/data/data.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -34,19 +33,6 @@ class MyHomePage extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Text('Fake HTTP call'),
-            Text(
-              Data().getWeather().access(
-                    (success) => 'weather: ${success.weather}\n'
-                        'chance of rain: ${success.propRain}\n'
-                        'temperature: ${success.tempInDegrees}',
-                    (failure) => failure.map(
-                      noConnection: (_) =>
-                          'Make sure you\'re connected to the internet!',
-                      unauthorized: (_) => 'You are not allowed to view this!',
-                    ),
-                  ),
-              style: Theme.of(context).textTheme.headline4,
-            ),
           ],
         ),
       ),

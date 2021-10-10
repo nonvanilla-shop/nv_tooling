@@ -1,6 +1,6 @@
 name: nv_tooling
 description: An assortment of useful classes used for development at NonVanilla.
-version: 0.1.0+1
+version: 0.2.0
 homepage: https://github.com/nonvanilla-shop/
 repository: https://github.com/nonvanilla-shop/nv_tooling
 
