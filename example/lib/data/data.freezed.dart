@@ -13,8 +13,8 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
-class _$HttpFailureTearOff {
-  const _$HttpFailureTearOff();
+class _$HttpExceptionTearOff {
+  const _$HttpExceptionTearOff();
 
   _NoConnection noConnection() {
     return const _NoConnection();
@@ -26,10 +26,10 @@ class _$HttpFailureTearOff {
 }
 
 /// @nodoc
-const $HttpFailure = _$HttpFailureTearOff();
+const $HttpException = _$HttpExceptionTearOff();
 
 /// @nodoc
-mixin _$HttpFailure {
+mixin _$HttpException {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() noConnection,
@@ -59,19 +59,20 @@ mixin _$HttpFailure {
 }
 
 /// @nodoc
-abstract class $HttpFailureCopyWith<$Res> {
-  factory $HttpFailureCopyWith(
-          HttpFailure value, $Res Function(HttpFailure) then) =
-      _$HttpFailureCopyWithImpl<$Res>;
+abstract class $HttpExceptionCopyWith<$Res> {
+  factory $HttpExceptionCopyWith(
+          HttpException value, $Res Function(HttpException) then) =
+      _$HttpExceptionCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class _$HttpFailureCopyWithImpl<$Res> implements $HttpFailureCopyWith<$Res> {
-  _$HttpFailureCopyWithImpl(this._value, this._then);
+class _$HttpExceptionCopyWithImpl<$Res>
+    implements $HttpExceptionCopyWith<$Res> {
+  _$HttpExceptionCopyWithImpl(this._value, this._then);
 
-  final HttpFailure _value;
+  final HttpException _value;
   // ignore: unused_field
-  final $Res Function(HttpFailure) _then;
+  final $Res Function(HttpException) _then;
 }
 
 /// @nodoc
@@ -82,7 +83,8 @@ abstract class _$NoConnectionCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$NoConnectionCopyWithImpl<$Res> extends _$HttpFailureCopyWithImpl<$Res>
+class __$NoConnectionCopyWithImpl<$Res>
+    extends _$HttpExceptionCopyWithImpl<$Res>
     implements _$NoConnectionCopyWith<$Res> {
   __$NoConnectionCopyWithImpl(
       _NoConnection _value, $Res Function(_NoConnection) _then)
@@ -94,12 +96,13 @@ class __$NoConnectionCopyWithImpl<$Res> extends _$HttpFailureCopyWithImpl<$Res>
 
 /// @nodoc
 
+@Implements(Exception)
 class _$_NoConnection implements _NoConnection {
   const _$_NoConnection();
 
   @override
   String toString() {
-    return 'HttpFailure.noConnection()';
+    return 'HttpException.noConnection()';
   }
 
   @override
@@ -155,7 +158,7 @@ class _$_NoConnection implements _NoConnection {
   }
 }
 
-abstract class _NoConnection implements HttpFailure {
+abstract class _NoConnection implements HttpException, Exception {
   const factory _NoConnection() = _$_NoConnection;
 }
 
@@ -167,7 +170,8 @@ abstract class _$UnauthorizedCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$UnauthorizedCopyWithImpl<$Res> extends _$HttpFailureCopyWithImpl<$Res>
+class __$UnauthorizedCopyWithImpl<$Res>
+    extends _$HttpExceptionCopyWithImpl<$Res>
     implements _$UnauthorizedCopyWith<$Res> {
   __$UnauthorizedCopyWithImpl(
       _Unauthorized _value, $Res Function(_Unauthorized) _then)
@@ -179,12 +183,13 @@ class __$UnauthorizedCopyWithImpl<$Res> extends _$HttpFailureCopyWithImpl<$Res>
 
 /// @nodoc
 
+@Implements(Exception)
 class _$_Unauthorized implements _Unauthorized {
   const _$_Unauthorized();
 
   @override
   String toString() {
-    return 'HttpFailure.unauthorized()';
+    return 'HttpException.unauthorized()';
   }
 
   @override
@@ -240,7 +245,7 @@ class _$_Unauthorized implements _Unauthorized {
   }
 }
 
-abstract class _Unauthorized implements HttpFailure {
+abstract class _Unauthorized implements HttpException, Exception {
   const factory _Unauthorized() = _$_Unauthorized;
 }
 

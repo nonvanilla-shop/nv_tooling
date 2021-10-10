@@ -6,12 +6,12 @@ import 'package:nv_tooling/nv_tooling.dart';
 part 'data.freezed.dart';
 
 class Data {
-  SuccessOrFailure<WeatherData, HttpFailure> getWeather() {
+  Result<WeatherData, HttpException> getWeather() {
     try {
       final map = fakeHttpCall();
-      return successOf(_mapToWeatherData(map));
+      return valueOf(_mapToWeatherData(map));
     } catch (e) {
-      return failureOf(HttpFailure.noConnection());
+      return exceptionOf(HttpException.noConnection());
     }
   }
 
@@ -32,9 +32,11 @@ class Data {
 
 // Sealed union is useful here to force ourselves to handle every possible scenario.
 @freezed
-class HttpFailure with _$HttpFailure {
-  const factory HttpFailure.noConnection() = _NoConnection;
-  const factory HttpFailure.unauthorized() = _Unauthorized;
+class HttpException extends Exception with _$HttpException {
+  @Implements(Exception)
+  const factory HttpException.noConnection() = _NoConnection;
+  @Implements(Exception)
+  const factory HttpException.unauthorized() = _Unauthorized;
 }
 
 @freezed

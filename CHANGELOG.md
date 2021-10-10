@@ -1,4 +1,8 @@
-## 0.0.11
+## 0.0.12
+
+* Add repository to pubspec.yaml.
+
+* ## 0.0.11
 
 * Fix Typo.
 

@@ -4,58 +4,65 @@ import 'package:nv_tooling/nv_tooling.dart';
 
 void main() {
   test('Success has boolean getters with correct return values', () {
-    final success = successOf(12);
+    final success = valueOf(12);
     expect(success.isFailure, false);
     expect(success.isSuccess, true);
   });
 
-  test('Failure has boolean getters with correct return values', () {
-    final success = failureOf(12);
+  test('Exception has boolean getters with correct return values', () {
+    final success = exceptionOf(Exception('Hello'));
     expect(success.isFailure, true);
     expect(success.isSuccess, false);
   });
 
   test('Success accessor calls onSuccess function', () {
-    final SuccessOrFailure<int, bool> success = successOf(12);
-    expect(success.access((success) => success, (failure) => -1), 12);
+    final Result<int, Exception> result = valueOf(12);
+    expect(result.access((success) => success, (_) => -1), 12);
   });
 
-  test('Failure accessor calls onFailure function', () {
-    final SuccessOrFailure<int, bool> failure = failureOf(true);
-    expect(failure.access((success) => false, (failure) => failure), true);
-  });
-
-  test('Failure maps to new failure correctly', () {
-    final SuccessOrFailure<int, bool> failure = failureOf(true);
+  test('Exception accessor calls onException function', () {
+    final exception = Exception('Hello');
+    final Result<int, Exception> result = exceptionOf(exception);
     expect(
-      failure
-          .map(failure: (f) => -1)
-          .access((success) => 12, (failure) => failure),
-      -1,
+      result.access((success) => false, (exception) => exception),
+      exception,
     );
   });
 
-  test('Failure maps to identity if no param passed', () {
-    final SuccessOrFailure<int, bool> failure = failureOf(true);
+  test('Exception maps to new Exception correctly', () {
+    final exception = Exception('Bye');
+    final Result<int, Exception> result = exceptionOf(Exception('Hello'));
     expect(
-      failure.map().access((success) => false, (failure) => failure),
-      true,
+      result
+          .map(exception: (_) => exception)
+          .access((success) => 12, (exception) => exception),
+      exception,
+    );
+  });
+
+  test('Exception maps to identity if no param passed', () {
+    final exception = Exception('Hello');
+    final Result<int, Exception> result = exceptionOf(exception);
+    expect(
+      result.map().access((success) => false, (exception) => exception),
+      exception,
     );
   });
 
   test('Success maps to new success correctly', () {
-    final SuccessOrFailure<int, bool> success = successOf(12);
+    final Result<int, Exception> result = valueOf(12);
     expect(
-      success.map(success: (s) => 'value: $s').access(
+      result.map(value: (s) => 'value: $s').access(
             (success) => success,
-            (failure) => failure,
+            (exception) => exception,
           ),
       'value: 12',
     );
   });
 
-  test('Failure maps to identity if no param passed', () {
-    final SuccessOrFailure<int, bool> success = successOf(1);
-    expect(success.map().access((success) => success, (failure) => failure), 1);
+  test('Exception maps to identity if no param passed', () {
+    final Result<int, Exception> success = valueOf(1);
+    expect(success.map().access((success) => success, (exception) => exception),
+        1);
   });
 }
