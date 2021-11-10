@@ -16,6 +16,7 @@ abstract class _Selection<T> {
   @override
   int get hashCode => _options.hashCode + _selected.hashCode;
 
+  /// Creates a copy with a different selection.
   _Selection copyWith(T selection);
 }
 

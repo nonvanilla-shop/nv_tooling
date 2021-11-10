@@ -3,6 +3,7 @@ class NvIterableExtensions {}
 
 /// Selection of Iterable Extensions frequently used at NonVanilla.
 extension IterableExtensions<T> on Iterable<T> {
+  /// Inserts a Type T in between every two elements in an iterable.
   Iterable<T> separatedBy(T separator) sync* {
     final iter = iterator;
     if (!iter.moveNext()) {
@@ -16,6 +17,7 @@ extension IterableExtensions<T> on Iterable<T> {
     }
   }
 
+  /// Behaves like the map function but also exposes the index of the current element.
   Iterable<R> mapIndexed<R>(R Function(int index, T element) f) sync* {
     final iter = iterator;
     int index = 0;
@@ -24,6 +26,16 @@ extension IterableExtensions<T> on Iterable<T> {
     }
   }
 
+  /// Behaves like the map function but iterates over n elements at a time.
+  Iterable<R> mapN<R>(R Function(List<T> element) f, {required int n}) sync* {
+    Iterable<T> ptr = this;
+    while (ptr.isNotEmpty) {
+      yield f(ptr.take(n).toList());
+      ptr = ptr.skip(n);
+    }
+  }
+
+  /// Group elements with the groupBy Function and map those groups with the groupBuilder.
   Iterable<G> mapGrouped<K, G>({
     required K? Function(T item) groupBy,
     required G Function(K? key, List<T> items) groupBuilder,
